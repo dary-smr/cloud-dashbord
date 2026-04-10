@@ -1,12 +1,6 @@
 import styles from "./ResourceCard.module.css";
+import type { Resource } from "../types";
 
-type Status = "running" | "stopped" | "pending";
-
-type Resource = {
-    id: number;
-    name: string;
-    status: Status;
-  };
   
   type ResourceCardProps = {
     resource: Resource;

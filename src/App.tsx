@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import { ResourceCard } from "./components/ResourceCard";
-
-type Status = "running" | "stopped" | "pending";
-
-type Resource = {
-  id: number;
-  name: string;
-  status: Status;
-};
+import type { Resource, Status } from "./types";
 
 function App() {
   const [resources, setResources] = useState<Resource[]>([]);
