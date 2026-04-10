@@ -14,21 +14,26 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      try {
       setLoading(true);
   
-      // имитация запроса на сервер
-      const data: Resource[] = await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve([
-            { id: 1, name: "Cluster A", status: "running" },
-            { id: 2, name: "Cluster B", status: "stopped" },
-            { id: 3, name: "Cluster C", status: "pending" },
-          ]);
-        }, 1000);
-      });
+      // запросы на сервер
+      const response = await fetch("https://jsonplaceholder.typicode.com/users");
+      const data = await response.json();
+      const mappedData: Resource[] = data.map((user: any) => ({
+        id: user.id,
+        name: user.name,
+        status: ["running", "stopped", "pending"][
+          Math.floor(Math.random() * 3)
+        ] as Status,
+      }));
   
-      setResources(data);
+      setResources(mappedData);
+    } catch (error) {
+      console.error("Ошибка загрузки:", error);
+    } finally {
       setLoading(false);
+    }
     };
   
     fetchData();
