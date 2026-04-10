@@ -5,3 +5,8 @@ export type Resource = {
   name: string;
   status: Status;
 };
+
+export type ApiUser = {
+    id: number;
+    name: string;
+  };

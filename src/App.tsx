@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ResourceCard } from "./components/ResourceCard";
-import type { Resource, Status } from "./types";
+import type { Resource, Status, ApiUser} from "./types";
 
 function App() {
   const [resources, setResources] = useState<Resource[]>([]);
@@ -19,8 +19,8 @@ function App() {
   
       // запросы на сервер
       const response = await fetch("https://jsonplaceholder.typicode.com/users");
-      const data = await response.json();
-      const mappedData: Resource[] = data.map((user: any) => ({
+      const data: ApiUser[] = await response.json();
+      const mappedData: Resource[] = data.map(user => ({
         id: user.id,
         name: user.name,
         status: ["running", "stopped", "pending"][
