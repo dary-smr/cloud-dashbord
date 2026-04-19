@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ResourceCard } from "./components/ResourceCard";
 import type { Resource, Status, ApiUser} from "./types";
+import { FilterPanel } from "./components/FilterPanel";
 
 function App() {
   const [resources, setResources] = useState<Resource[]>([]);
@@ -58,10 +59,10 @@ function App() {
     <div  style={{ padding: "20px" }}>
       <h1>Cloud Dashboard</h1>
 
-      <button onClick={() => setFilter("all")}>All</button>
-      <button onClick={() => setFilter("running")}>Running</button>
-      <button onClick={() => setFilter("stopped")}>Stopped</button>
-      <button onClick={() => setFilter("pending")}>Pending</button>
+      <FilterPanel
+        currentFilter={filter}
+        onChangeFilter={setFilter}      
+      />
 
       {filteredResources.map((r) => (
         <ResourceCard key={r.id} resource={r} />
