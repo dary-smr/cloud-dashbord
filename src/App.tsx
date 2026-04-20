@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ResourceCard } from "./components/ResourceCard";
-import type { Resource, Status, ApiUser} from "./types";
+import type { Resource, Status} from "./types";
 import { FilterPanel } from "./components/FilterPanel";
 import { fetchResourses } from "./api";
 
@@ -23,7 +23,7 @@ function App() {
     const data = await fetchResourses();
 
     setResources(data);
-    
+
   } catch (err) {
     setError("Не удалось загрузить данные");
   } finally {
