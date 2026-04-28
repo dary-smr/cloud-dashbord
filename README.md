@@ -1,73 +1,73 @@
-# React + TypeScript + Vite
+# Cloud Dashboard (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-приложение для управления облачными ресурсами (аналог личного кабинета cloud-платформы).
 
-Currently, two official plugins are available:
+## 🧠 Архитектура
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Приложение построено по компонентному подходу:
 
-## React Compiler
+- UI разделён на переиспользуемые компоненты
+- Логика фильтрации вынесена в отдельный компонент
+- Данные загружаются через API и хранятся в состоянии React
+- Типизация реализована с использованием TypeScript
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Функциональность
 
-## Expanding the ESLint configuration
+- Отображение списка ресурсов (виртуальные машины, сервисы)
+- Фильтрация по статусу (Running / Stopped)
+- Загрузка данных с API
+- Обработка состояний:
+  - loading
+  - error
+- Повторный запрос (retry)
+- Подсветка активного фильтра
+- Адаптивная верстка
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Технологии
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React
+- TypeScript
+- Vite
+- CSS
+- Git / GitHub
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Тестирование
+
+- Vitest
+- @testing-library/react
+- @testing-library/jest-dom
+
+Реализованы unit-тесты для компонентов:
+- проверка пользовательских действий (клики)
+- проверка вызова callback-функций
+- проверка UI-состояний
+
+---
+
+## Установка и запуск
+
+```bash
+npm install
+npm run dev
 ```
+Приложение будет доступно по адресу:
+http://localhost:5173
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Запуск тестов
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npx vitest
 ```
+## Структура проекта
+
+- src/
+  - components/ # UI-компоненты
+    - ResourceCard.tsx # отображение ресурса
+    - FilterPanel.tsx # фильтрация по статусу
+  - App.tsx # корневой компонент
+  - main.tsx # точка входа
+
